@@ -22,35 +22,8 @@ using namespace std;
 */
 
 
-void SolveMaze(int row, int col, char maze[][100], int rowSz, int colSz, bool& foundEnd, string& finaldir, const string& currDir) {
-	if (foundEnd)
-		return;
+void SolveMaze(int row, int col, char maze[][100], int rowSz, int colSz, bool& foundEnd, string& finaldir, string currDir) {
 
-	if (row < 0 || col < 0 || row > rowSz || col > colSz)
-		return;
-
-	if (maze[row][col] == '.')	// Already visited
-		return;
-
-	if (maze[row][col] == '@')  // Can't walk into wall
-		return;
-
-	if (maze[row][col] == 'F') {  // Found the end
-		foundEnd = true;
-		finaldir = currDir;
-		return;
-	}
-
-	maze[row][col] = '.';
-
-	string blah = currDir + "R";
-	SolveMaze(row,     col + 1, maze, rowSz, colSz, foundEnd, finaldir, currDir + "R"); // Checking right...
-	SolveMaze(row - 1, col,     maze, rowSz, colSz, foundEnd, finaldir, currDir + "U"); // Checking up...
-	SolveMaze(row + 1, col,     maze, rowSz, colSz, foundEnd, finaldir, currDir + "D"); // Checking down...
-	SolveMaze(row    , col - 1, maze, rowSz, colSz, foundEnd, finaldir, currDir + "L"); // Checking left...
-
-	if (!foundEnd)
-		maze[row][col] = ' ';
 }
 
 int main()
